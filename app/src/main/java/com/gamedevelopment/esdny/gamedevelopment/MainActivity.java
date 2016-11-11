@@ -16,6 +16,10 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
+    int count=1;
+    int lastTouch;
+    final ImageAdapter adapter = new ImageAdapter(this);
+
     public Integer[] aNumbers = {R.drawable.one,R.drawable.two,
             R.drawable.three,R.drawable.four,
             R.drawable.five,R.drawable.six,
@@ -25,6 +29,13 @@ public class MainActivity extends Activity {
             R.drawable.thirteen,R.drawable.fourteen,
             R.drawable.fifeteen};
 
+
+    final String [] alphabet1= new String[] {
+            " A "," a"," B "," b "," C ",
+            " c "," D "," d "," E "," e ",
+            " F "," f "," G "," g "," H ",
+            " h "," I "," i "," J "," j "
+    };
     public final Integer[] OriginalLoadingScreen = {R.drawable.one,R.drawable.two,
             R.drawable.three,R.drawable.four,
             R.drawable.five,R.drawable.six,
@@ -34,20 +45,21 @@ public class MainActivity extends Activity {
             R.drawable.thirteen,R.drawable.fourteen,
             R.drawable.fifeteen};
 
-    public Integer[] emojis = {R.drawable.shyEmoji,R.drawable.shyEmoji,
-            R.drawable.MoneyEmoji,R.drawable.MoneyEmoji,
-            R.drawable.QueenEmoji,R.drawable.QueenEmoji,
-            R.drawable.GlassEmoji,R.drawable.GlassEmoji,
-            R.drawable.winkEmoji,R.drawable.winkEmoji,
+    public Integer[] emojis = {R.drawable.shy_emoji,R.drawable.shy_emoji,
+            R.drawable.money_emoji,R.drawable.money_emoji,
+            R.drawable.queen_emoji,R.drawable.queen_emoji,
+            R.drawable.glass_emoji,R.drawable.glass_emoji,
+            R.drawable.wink_emoji,R.drawable.wink_emoji,
             R.drawable.emoji_sexface,R.drawable.emoji_sexface,
-            R.drawable.angelEmoji,R.drawable.angelEmoji,
+            R.drawable.angel_emoji,R.drawable.angel_emoji,
             R.drawable.fifeteen};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         GridView gr = (GridView) findViewById(R.id.gridView1);
-        gr.setAdapter(new ImageAdapter(this));
+
+        gr.setAdapter (adapter);
         gr.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> parent,
                                     View v, int position, long id)
@@ -55,6 +67,10 @@ public class MainActivity extends Activity {
                 Toast.makeText(getBaseContext(),
                         "pic" + (position + 1) + " selected",
                         Toast.LENGTH_SHORT).show();
+
+                checkForMatch(position);
+                //adapter.NotifyDataSetChanged();
+                count++;
 
             }
         });
@@ -101,6 +117,47 @@ public class MainActivity extends Activity {
             return imageView;
         }
     }
+
+
+
+    public void checkForMatch(int position1)
+    {
+        aNumbers[position1]=emojis[position1];
+
+
+        if (count % 2==1)
+        {
+            lastTouch=position1;
+
+        }
+
+        else if (count %2== 0)
+        {
+            if( alphabet1[lastTouch].equalsIgnoreCase(alphabet1[position1]))
+            {
+                Toast.makeText(getApplicationContext(),
+                        " match maid "+ "this is last touch "+lastTouch + "this is current " + position1 , Toast.LENGTH_SHORT).show();
+
+
+                //adapter.notifyDataSetChanged();
+                count=0;
+            }
+            else {
+
+                aNumbers[lastTouch]=OriginalLoadingScreen[lastTouch];
+                //loadscreen2[position]=" # ";
+                aNumbers[position1]=OriginalLoadingScreen[position1];
+                //adapter.notifyDataSetChanged();
+
+
+            }
+
+
+
+        }
+    }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
