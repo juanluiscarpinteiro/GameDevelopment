@@ -31,10 +31,9 @@ public class MainActivity extends Activity {
 
 
     final String [] alphabet1= new String[] {
-            " A "," a"," B "," b "," C ",
+            " A "," h"," B "," b "," C ",
             " c "," D "," d "," E "," e ",
-            " F "," f "," G "," g "," H ",
-            " h "," I "," i "," J "," j "
+            " F "," f "," G "," g "," a ",
     };
     public final Integer[] OriginalLoadingScreen = {R.drawable.one,R.drawable.two,
             R.drawable.three,R.drawable.four,
@@ -45,14 +44,14 @@ public class MainActivity extends Activity {
             R.drawable.thirteen,R.drawable.fourteen,
             R.drawable.fifeteen};
 
-    public Integer[] emojis = {R.drawable.shy_emoji,R.drawable.shy_emoji,
+    public Integer[] emojis = {R.drawable.shy_emoji,R.drawable.fifeteen,
             R.drawable.money_emoji,R.drawable.money_emoji,
             R.drawable.queen_emoji,R.drawable.queen_emoji,
             R.drawable.glass_emoji,R.drawable.glass_emoji,
             R.drawable.wink_emoji,R.drawable.wink_emoji,
             R.drawable.emoji_sexface,R.drawable.emoji_sexface,
             R.drawable.angel_emoji,R.drawable.angel_emoji,
-            R.drawable.fifeteen};
+            R.drawable.shy_emoji};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +68,7 @@ public class MainActivity extends Activity {
                         Toast.LENGTH_SHORT).show();
 
                 checkForMatch(position);
-                //adapter.NotifyDataSetChanged();
+                adapter.notifyDataSetChanged();
                 count++;
 
             }
