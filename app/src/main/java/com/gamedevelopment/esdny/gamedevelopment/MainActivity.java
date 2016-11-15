@@ -144,12 +144,16 @@ public class MainActivity extends Activity {
             adapter.notifyDataSetChanged();
 
 
-            if( alphabet1[lastTouch].equalsIgnoreCase(alphabet1[position1])&& lastTouch!= position1)
+            if( alphabet1[lastTouch].equalsIgnoreCase(alphabet1[position1])&& (lastTouch!= position1||(alphabet1[lastTouch].equalsIgnoreCase("z")&&alphabet1[lastTouch].equalsIgnoreCase("z"))))
                 {
                     Toast.makeText(getApplicationContext(),
                             " match maid "+ "this is last touch "+lastTouch + "current is " + position1 + " count "+ count , Toast.LENGTH_SHORT).show();
 
+                    gridView.getChildAt(lastTouch).setVisibility(View.INVISIBLE);
+                    gridView.getChildAt(position1).setVisibility(View.INVISIBLE);
 
+                    alphabet1[lastTouch]="z";
+                    alphabet1[position1]="z";
                     adapter.notifyDataSetChanged();
                     count=0;
                     gridView.setEnabled(true);
