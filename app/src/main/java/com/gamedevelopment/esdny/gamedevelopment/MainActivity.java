@@ -15,6 +15,8 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.util.Random;
+
 public class MainActivity extends Activity {
 
     int count=1;
@@ -29,13 +31,16 @@ public class MainActivity extends Activity {
             R.drawable.nine,R.drawable.ten,
             R.drawable.eleven,R.drawable.twelve,
             R.drawable.thirteen,R.drawable.fourteen,
-            R.drawable.fifeteen};
+            R.drawable.fifeteen,R.drawable.sixteen,
+            R.drawable.seventeen,R.drawable.eighteen,
+            R.drawable.nineteen,R.drawable.twenty};
 
 
     final String [] alphabet1= new String[] {
-            " A "," h"," B "," b "," C ",
+            " A "," J "," B "," b "," C ",
             " c "," D "," d "," E "," e ",
             " F "," f "," G "," g "," a ",
+            " H "," h "," I "," i "," j "
     };
     public final Integer[] OriginalLoadingScreen = {R.drawable.one,R.drawable.two,
             R.drawable.three,R.drawable.four,
@@ -44,16 +49,20 @@ public class MainActivity extends Activity {
             R.drawable.nine,R.drawable.ten,
             R.drawable.eleven,R.drawable.twelve,
             R.drawable.thirteen,R.drawable.fourteen,
-            R.drawable.fifeteen};
+            R.drawable.fifeteen,R.drawable.sixteen,
+            R.drawable.seventeen,R.drawable.eighteen,
+            R.drawable.nineteen,R.drawable.twenty};
 
-    public Integer[] emojis = {R.drawable.shy_emoji,R.drawable.fifeteen,
+    public Integer[] emojis = {R.drawable.shy_emoji,R.drawable.fearfull_emoji,
             R.drawable.money_emoji,R.drawable.money_emoji,
             R.drawable.queen_emoji,R.drawable.queen_emoji,
             R.drawable.glass_emoji,R.drawable.glass_emoji,
             R.drawable.wink_emoji,R.drawable.wink_emoji,
             R.drawable.emoji_sexface,R.drawable.emoji_sexface,
             R.drawable.angel_emoji,R.drawable.angel_emoji,
-            R.drawable.shy_emoji};
+            R.drawable.shy_emoji,R.drawable.tooth_emoji,
+            R.drawable.tooth_emoji,R.drawable.alien_emoji,
+            R.drawable.alien_emoji,R.drawable.fearfull_emoji};
 
 
     @Override
@@ -61,7 +70,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         final GridView gr = (GridView) findViewById(R.id.gridView1);
-
+        shuffleArray(emojis,alphabet1);
         gr.setAdapter (adapter);
         gr.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> parent,
@@ -149,16 +158,14 @@ public class MainActivity extends Activity {
                     Toast.makeText(getApplicationContext(),
                             " match maid "+ "this is last touch "+lastTouch + "current is " + position1 + " count "+ count , Toast.LENGTH_SHORT).show();
 
-                    gridView.getChildAt(lastTouch).setVisibility(View.INVISIBLE);
-                    gridView.getChildAt(position1).setVisibility(View.INVISIBLE);
+                    delayToDisapear(position1,gridView);
 
                     alphabet1[lastTouch]="z";
                     alphabet1[position1]="z";
                     adapter.notifyDataSetChanged();
                     count=0;
-                    gridView.setEnabled(true);
-                    gridView.getChildAt(lastTouch).setClickable(false);
-                    gridView.getChildAt(position1).setEnabled(false);
+
+
 
                 }
                 else {
@@ -195,8 +202,44 @@ public class MainActivity extends Activity {
                 adapter.notifyDataSetChanged();
                 gr.setEnabled(true);
             }
-        }, 2000);
+        }, 1000);
 
+    }
+
+    public void delayToDisapear(int position,GridView gridView)
+    {
+        final GridView gr =gridView;
+        final int positionLocal= position;
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                gr.getChildAt(lastTouch).setVisibility(View.INVISIBLE);
+                gr.getChildAt(positionLocal).setVisibility(View.INVISIBLE);
+                gr.getChildAt(lastTouch).setClickable(false);
+                gr.getChildAt(positionLocal).setEnabled(false);
+                gr.setEnabled(true);
+                adapter.notifyDataSetChanged();
+            }
+        }, 1000);
+
+    }
+
+    private static void shuffleArray(Integer[] array,String[] array1)
+    {
+        int index, temp;
+        String temp1;
+        Random random = new Random();
+        for (int i = array.length - 1; i > 0; i--)
+        {
+            index = random.nextInt(i + 1);
+            temp = array[index];
+            temp1 = array1[index];
+            array[index] = array[i];
+            array1[index] = array1[i];
+            array[i] = temp;
+            array1[i] = temp1;
+        }
     }
 
 
