@@ -2,6 +2,7 @@ package com.gamedevelopment.esdny.gamedevelopment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,8 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Random;
@@ -23,6 +27,9 @@ public class MainActivity extends Activity {
     int lastTouch;
     final ImageAdapter adapter = new ImageAdapter(this);
     Handler handler = new Handler();
+    boolean gameOverStatus= false;
+    String PictureName="pig";
+    //int alphabetLength = alphabet1.length();
 
     public Integer[] aNumbers = {R.drawable.one,R.drawable.two,
             R.drawable.three,R.drawable.four,
@@ -42,6 +49,8 @@ public class MainActivity extends Activity {
             " F "," f "," G "," g "," a ",
             " H "," h "," I "," i "," j "
     };
+
+    int arraySize ;
     public final Integer[] OriginalLoadingScreen = {R.drawable.one,R.drawable.two,
             R.drawable.three,R.drawable.four,
             R.drawable.five,R.drawable.six,
@@ -71,6 +80,32 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         final GridView gr = (GridView) findViewById(R.id.gridView1);
         shuffleArray(emojis,alphabet1);
+        arraySize = alphabet1.length;
+
+
+        final Button button = (Button) findViewById(R.id.imageButton);
+        final EditText myEditText=(EditText) findViewById(R.id.textBox);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                String UsersAnswer = (String) myEditText.getText().toString();
+                if(UsersAnswer.equalsIgnoreCase(PictureName))
+                {
+                    startActivity(new Intent(MainActivity.this,winner.class ));
+                }
+                else {
+                    Toast.makeText(getApplicationContext(),
+                            " Please Enter the name of the nimal in the picture " , Toast.LENGTH_SHORT).show();
+
+
+                }
+
+            }
+        });
+
+
+
         gr.setAdapter (adapter);
         gr.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> parent,
@@ -220,6 +255,7 @@ public class MainActivity extends Activity {
                 gr.getChildAt(positionLocal).setEnabled(false);
                 gr.setEnabled(true);
                 adapter.notifyDataSetChanged();
+                CheckForEndofGame();
             }
         }, 1000);
 
@@ -241,6 +277,31 @@ public class MainActivity extends Activity {
             array1[i] = temp1;
         }
     }
+    private  void CheckForEndofGame()
+    {
+
+        for (int i=0;i<arraySize;i++)
+        {
+            if(!(alphabet1[i].equalsIgnoreCase("z")))
+            {
+                break;
+
+            }
+             else{
+
+                gameOverStatus=true;
+            }
+
+        }
+        if(gameOverStatus==true)
+        {
+            Toast.makeText(getApplicationContext(),
+                    " Please Enter the name of the nimal in the picture " , Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+
 
 
 
