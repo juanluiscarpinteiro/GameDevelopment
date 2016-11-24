@@ -43,6 +43,17 @@ public class MainActivity extends Activity {
             R.drawable.nineteen,R.drawable.twenty};
 
 
+
+    public Integer[] aNumbersNew = {R.drawable.one,R.drawable.two,
+            R.drawable.three,R.drawable.four,
+            R.drawable.five,R.drawable.six,
+            R.drawable.seven,R.drawable.eight,
+            R.drawable.nine,R.drawable.ten,
+            R.drawable.eleven,R.drawable.twelve,
+            R.drawable.thirteen,R.drawable.fourteen,
+            R.drawable.fifeteen};
+
+
     final String [] alphabet1= new String[] {
             " A "," J "," B "," b "," C ",
             " c "," D "," d "," E "," e ",
@@ -90,6 +101,9 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 // Perform action on click
                 String UsersAnswer = (String) myEditText.getText().toString();
+                UsersAnswer = UsersAnswer.replace(" ", "");
+                Toast.makeText(getApplicationContext(),
+                        " this is what you entered " + UsersAnswer + "name of the pic is " + PictureName, Toast.LENGTH_SHORT).show();
                 if(UsersAnswer.equalsIgnoreCase(PictureName))
                 {
                     startActivity(new Intent(MainActivity.this,winner.class ));
@@ -111,9 +125,9 @@ public class MainActivity extends Activity {
             public void onItemClick(AdapterView<?> parent,
                                     View v, int position, long id)
             {
-                Toast.makeText(getBaseContext(),
-                        "pic" + (position + 1) + " selected " +"count "+ count ,
-                        Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getBaseContext(),
+//                        "pic" + (position + 1) + " selected " +"count "+ count ,
+//                        Toast.LENGTH_SHORT).show();
 
                 checkForMatch(position,gr);
                // gr.setEnabled(true);
@@ -190,8 +204,8 @@ public class MainActivity extends Activity {
 
             if( alphabet1[lastTouch].equalsIgnoreCase(alphabet1[position1])&& (lastTouch!= position1||(alphabet1[lastTouch].equalsIgnoreCase("z")&&alphabet1[lastTouch].equalsIgnoreCase("z"))))
                 {
-                    Toast.makeText(getApplicationContext(),
-                            " match maid "+ "this is last touch "+lastTouch + "current is " + position1 + " count "+ count , Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getApplicationContext(),
+//                            " match maid "+ "this is last touch "+lastTouch + "current is " + position1 + " count "+ count , Toast.LENGTH_SHORT).show();
 
                     delayToDisapear(position1,gridView);
 
@@ -199,6 +213,8 @@ public class MainActivity extends Activity {
                     alphabet1[position1]="z";
                     adapter.notifyDataSetChanged();
                     count=0;
+                    Toast.makeText(getApplicationContext(),
+                    " Match Made ", Toast.LENGTH_SHORT).show();
 
 
 
@@ -206,7 +222,7 @@ public class MainActivity extends Activity {
                 else {
 
                  Toast.makeText(getApplicationContext(),
-                         " match not maid "+ "this is last touch "+lastTouch + "current is " + position1 + " count "+ count , Toast.LENGTH_SHORT).show();
+                         " match not made ", Toast.LENGTH_SHORT).show();
 
 
                     setOriginalImages(position1, gridView);

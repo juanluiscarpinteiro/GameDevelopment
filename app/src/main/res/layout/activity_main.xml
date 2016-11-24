@@ -25,7 +25,7 @@
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:text="Validate Image"
+        android:text="Try"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="17dp"
@@ -43,7 +43,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:id="@+id/textBox"
-        android:hint="Enter The Name Of Image"
+        android:hint="Gess The Animal"
         android:textColorHint="@android:color/white"
         android:textColor="@color/primary_text_default_material_dark"
         android:layout_alignTop="@+id/imageButton" />
