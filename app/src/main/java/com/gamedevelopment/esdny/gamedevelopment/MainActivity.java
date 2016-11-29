@@ -3,9 +3,8 @@ package com.gamedevelopment.esdny.gamedevelopment;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,8 +14,8 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Random;
@@ -28,12 +27,13 @@ public class MainActivity extends Activity {
     final ImageAdapter adapter = new ImageAdapter(this);
     Handler handler = new Handler();
     boolean gameOverStatus= false;
-    String PictureName="pig";
+    String backgroundPictureName;
+    Random rand = new Random();
     //int alphabetLength = alphabet1.length();
 
-    public Integer[] backgroundImages = {R.drawable.pig, R.drawable.giraffe,R.drawable.cow,R.drawable.rabbit,R.drawable.hippo};
+    public Integer[] backgroundImages = {R.drawable.pig, R.drawable.giraffe,R.drawable.cow,R.drawable.rabbit,R.drawable.hippo,R.drawable.cat,R.drawable.dog,R.drawable.donkey,R.drawable.eagle,R.drawable.horse};
 
-    String [] animalNames = new String []{"pig", "giraffe","cow","rabbit","hippo"};
+    String [] animalNames = new String []{"pig", "giraffe","cow","rabbit","hippo","cat","dog","donkey","eagle","horse"};
 
 
 
@@ -98,10 +98,12 @@ public class MainActivity extends Activity {
         final GridView gr = (GridView) findViewById(R.id.gridView1);
         shuffleArray(emojis,alphabet1);
         arraySize = alphabet1.length;
-        gr.setBackground();
+        final int randomIndex = rand.nextInt(10);
+        backgroundPictureName= animalNames[randomIndex];
+        gr.setBackgroundResource(backgroundImages[randomIndex]);
 
 
-        final Button button = (Button) findViewById(R.id.imageButton);
+        final Button button = (Button) findViewById(R.id.playAgainButton);
         final EditText myEditText=(EditText) findViewById(R.id.textBox);
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -109,12 +111,20 @@ public class MainActivity extends Activity {
                 // Perform action on click
                 String UsersAnswer = (String) myEditText.getText().toString();
                 UsersAnswer = UsersAnswer.replace(" ", "");
-                Toast.makeText(getApplicationContext(),
-                        " this is what you entered " + UsersAnswer + "name of the pic is " + PictureName, Toast.LENGTH_SHORT).show();
-                if(UsersAnswer.equalsIgnoreCase(PictureName))
+
+                if(UsersAnswer.equalsIgnoreCase(backgroundPictureName))
                 {
-                    finish();
-                    startActivity(new Intent(MainActivity.this,winner.class ));
+                    Toast.makeText(getApplicationContext(),
+                            "The Name of the Animal is " + backgroundPictureName, Toast.LENGTH_LONG).show();
+
+                    for(int i=0;i<alphabet1.length;i++)
+                    {
+                        gr.getChildAt(i).setVisibility(View.INVISIBLE);
+                    }
+                    myEditText.setVisibility(View.INVISIBLE);
+                    button.setVisibility(View.INVISIBLE);
+                    EndOfActivity();
+
                 }
                 else {
                     Toast.makeText(getApplicationContext(),
@@ -282,6 +292,22 @@ public class MainActivity extends Activity {
                 CheckForEndofGame();
             }
         }, 1000);
+
+    }
+
+    public void EndOfActivity()
+    {
+
+        //gridView.setVisibility(View.INVISIBLE);
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                finish();
+
+                startActivity(new Intent(MainActivity.this,winner.class ));
+            }
+        }, 5000);
 
     }
 
