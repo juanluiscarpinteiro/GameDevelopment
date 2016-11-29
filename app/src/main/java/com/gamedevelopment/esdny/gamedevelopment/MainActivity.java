@@ -31,6 +31,12 @@ public class MainActivity extends Activity {
     String PictureName="pig";
     //int alphabetLength = alphabet1.length();
 
+    public Integer[] backgroundImages = {R.drawable.pig, R.drawable.giraffe,R.drawable.cow,R.drawable.rabbit,R.drawable.hippo};
+
+    String [] animalNames = new String []{"pig", "giraffe","cow","rabbit","hippo"};
+
+
+
     public Integer[] aNumbers = {R.drawable.one,R.drawable.two,
             R.drawable.three,R.drawable.four,
             R.drawable.five,R.drawable.six,
@@ -92,6 +98,7 @@ public class MainActivity extends Activity {
         final GridView gr = (GridView) findViewById(R.id.gridView1);
         shuffleArray(emojis,alphabet1);
         arraySize = alphabet1.length;
+        gr.setBackground();
 
 
         final Button button = (Button) findViewById(R.id.imageButton);
@@ -106,6 +113,7 @@ public class MainActivity extends Activity {
                         " this is what you entered " + UsersAnswer + "name of the pic is " + PictureName, Toast.LENGTH_SHORT).show();
                 if(UsersAnswer.equalsIgnoreCase(PictureName))
                 {
+                    finish();
                     startActivity(new Intent(MainActivity.this,winner.class ));
                 }
                 else {
