@@ -33,6 +33,7 @@
         android:layout_marginTop="17dp"
         android:id="@+id/playAgainButton"
         android:layout_below="@+id/gridView1"
+        android:background="@drawable/blue_button"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
