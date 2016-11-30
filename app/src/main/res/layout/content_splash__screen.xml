@@ -17,29 +17,16 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView2"
-        android:text="Welcome to The Concentration Game.
-This app is a simple game that helps you strengthen your memory span.
-
-         How Does It Work?
-
-The app gives you a grid of numbers which are placeholders for an emoji. Click on top of any number and then another to try to match pairs.
-
-Once a pair is found you there will be a few seconds pause then the emoji’s will disappear. After they disappear a piece of the background will be revealed so you can see a piece of the picture of an animal. YOUR GOAL IS TO GUESS THE ANIMAL.
-
-At any point of the game, you could guess the name of the animal by typing the name in the “Guess the animal textbox” followed by pressing the button “Try”. If the animal is the right animal, you win.
-
-I hope you have fun
-Truly Yours,
-The Developer."
+        android:id="@+id/instructionsTextView"
         android:textAlignment="center"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/white"
+        android:textSize="16sp" />
 
     <Button
         android:text="Start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/button"
+        android:id="@+id/StartButton"
         android:background="@drawable/blue_button"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
@@ -49,8 +36,11 @@ The Developer."
         android:text="Are You Ready?"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView2"
-        android:layout_centerHorizontal="true"
         android:id="@+id/textView3"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/white"
+        android:layout_above="@+id/StartButton"
+        android:layout_alignLeft="@+id/StartButton"
+        android:layout_alignStart="@+id/StartButton"
+        android:layout_marginBottom="13dp"
+        android:textSize="16sp" />
 </RelativeLayout>
