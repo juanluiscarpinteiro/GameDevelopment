@@ -37,7 +37,8 @@ public class Splash_Screen extends Activity {
                 "How Does It Work?"+
                 "\n" +
                 "The app gives you a grid of numbers which are placeholders for an emoji. Click on top of any number and then another to try to match pairs.\n" +
-                "Once a pair is found you there will be a few seconds pause then the emoji’s will disappear. After they disappear a piece of the background will be revealed so you can see a piece of the picture of an animal. YOUR GOAL IS TO GUESS THE ANIMAL.\n" +
+                "Once a pair is found you there will be a few seconds pause then the emoji’s will disappear. After they disappear a piece of the background will be revealed so you can see a piece of the picture of an animal.\n" +
+                " YOUR GOAL IS TO GUESS THE ANIMAL.\n" +
                 "\n" +
                 "At any point of the game, you could guess the name of the animal by typing the name in the “Guess the animal textbox” followed by pressing the button “Try”. If the animal is the right animal, you win.\n" +
                 "\n" +
